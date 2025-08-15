@@ -1,3 +1,3 @@
 # Task Management Api
 
-A Restful Api built with nest js for task management.
+A Task management api built with nest js serves as a boilerplate for building nest js apps.
