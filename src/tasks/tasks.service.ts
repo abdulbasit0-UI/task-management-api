@@ -11,11 +11,11 @@ export class TasksService {
   constructor(
     @InjectRepository(Task)
     private taskRepository: Repository<Task>
-  ) {}
+  ) { }
 
-  async getTasks(): Promise<Task[]> {
+  async getTasks(userId: string): Promise<Task[]> {
     this.logger.log("Getting all tasks");
-    const tasks = await this.taskRepository.find();
+    const tasks = await this.taskRepository.find({ where: { userId } });
     this.logger.debug(`Found ${tasks.length} tasks`);
     return tasks;
 
@@ -37,6 +37,7 @@ export class TasksService {
     const task = this.taskRepository.create({
       title,
       description,
+      userId: createTaskDto.userId,
       status: TaskStatus.open,
     });
 
