@@ -4,7 +4,10 @@ import { AppService } from "./app.service";
 import { TasksModule } from "./tasks/tasks.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 import Joi from "joi";
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -18,6 +21,18 @@ import Joi from "joi";
         DB_DATABASE: Joi.string().required(),
         LOG_LEVEL: Joi.string().valid('log', 'debug', 'verbose', 'warn', 'error').default('debug')
       })
+    }),
+
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRATION'),
+        }
+      })
+      
     }),
 
     TypeOrmModule.forRootAsync({
@@ -36,6 +51,8 @@ import Joi from "joi";
       })
     }),
     TasksModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -20,6 +20,9 @@ export class Task {
   @Column()
   title: string;
 
+  @Column()
+  userId: string;
+
   @Column({ nullable: true })
   description: string;
 
