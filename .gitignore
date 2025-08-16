@@ -1,33 +1,38 @@
-# Node.js
-node_modules/
-npm-debug.log
-yarn-error.log
-yarn-debug.log
-.pnpm-debug.log
+# Compilation
+*.js
+!main.js
+!src/**/*.js
+!dist/
 
-# Build files
-dist/
+# TypeScript
+*.tsbuildinfo
 coverage/
 
-# Environment variables
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Environment
 .env
 .env.local
 .env.development
 .env.test
 .env.production
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-.DS_Store
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Logs
-logs
-*.log
-
-# Optional npm/yarn/pnpm files
-.npm
-.yarn
-.pnpm
+# Build
+dist/
+build/
