@@ -23,7 +23,6 @@ import Joi from "joi";
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-
       useFactory: (configService: ConfigService) => ({
         type: configService.get<'postgres'>('DB_TYPE'),
         host: configService.get<string>('DB_HOST'),
@@ -32,7 +31,7 @@ import Joi from "joi";
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: configService.get<boolean>('DB_SYNC', true),
+        synchronize: configService.get<boolean>('DB_SYNC', false),
         logging: configService.get<boolean>('DB_LOGGING', false),
       })
     }),
